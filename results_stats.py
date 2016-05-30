@@ -26,7 +26,7 @@ def fill_dict(dest, key, sub_list, src):
         dest[key][this] += src[this]
     pass
 
-def print_res(results, colors=True):
+def print_res(results, colors_off=False):
     OK = '\033[92m'
     WARN = '\033[93m'
     FAIL = '\033[91m'
@@ -40,12 +40,19 @@ def print_res(results, colors=True):
             color = WARN
         if pct < 74.3:
             color = FAIL
+
+        if colors_off:
+            CLR = ''
+            color = ''
+
         print (CLR + "Test: %s :: %d/%d = " + color + "%3.2f%%" + CLR) % \
                 (this, tc, ta, pct)
 
 # Argument Parsing
 parser = argparse.ArgumentParser(
         description='Generate analytics based on your results JSON')
+parser.add_argument('-c', '--colors-off', action='store_true',
+        help="Disable color coding")
 parser.add_argument('filename', metavar='input', type=str, nargs=1,
         help='Name of text file containing previous test')
 args = parser.parse_args()
@@ -79,15 +86,15 @@ for this in num_sorted:
     fill_dict(res_sub, test + sect + sub, key_list, this)
 
 print "========== SORTED BY TEST =========="
-print_res(res_test)
+print_res(res_test, args.colors_off)
 print ""
 
 print "========== SORTED BY SECTION =========="
-print_res(res_sect)
+print_res(res_sect, args.colors_off)
 print ""
 
 print "========== SORTED BY SUBSECTION =========="
-print_res(res_sub)
+print_res(res_sub, args.colors_off)
 print ""
 
 print "========== QUESTION LAST ANSWERED INCORRECT =========="
