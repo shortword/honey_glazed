@@ -34,7 +34,10 @@ def print_res(results, colors_off=False):
     for this in sorted(results):
         tc = results[this]['times_correct']
         ta = results[this]['times_asked']
-        pct = float(tc) / float(ta) * 100
+        if ta:
+            pct = float(tc) / float(ta) * 100
+        else:
+            pct = 0
         color = OK
         if pct < 80:
             color = WARN
