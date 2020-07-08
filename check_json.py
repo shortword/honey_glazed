@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Authors:
 # Michael Bergeron - mikeb.code@gmail.com - Copyright 2016
@@ -27,17 +27,17 @@ with open(args.filename[0], 'r') as f:
 
 for this in data:
     if not this['number']:
-        print "ERROR: Entry without a number"
+        print("ERROR: Entry without a number")
         continue
 
     if not this['answer'] or not re.match('[A-D]', this['answer']):
-        print "ERROR: %s has invalid answer" % (this['number'])
+        print("ERROR: %s has invalid answer" % (this['number']))
 
     if not this['text']:
-        print "ERROR: %s has invalid question text" % (this['number'])
+        print("ERROR: %s has invalid question text" % (this['number']))
 
     if len(this['answers']) != 4:
-        print "ERROR: %s has invalid number of answers" % (this['number'])
+        print("ERROR: %s has invalid number of answers" % (this['number']))
 
-print "Test completed"
+print("Test completed")
 

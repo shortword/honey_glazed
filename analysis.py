@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Authors:
 # Michael Bergeron - mikeb.code@gmail.com - Copyright 2016
@@ -39,7 +39,7 @@ for this in data:
     answers[this['answer']] += 1
     total += 1
 
-for this in string.uppercase[:4]:
-    print "%s: %s of %d (%2.2f %%)" % (this, answers[this], total,
-            (float(answers[this])/float(total)) * 100)
+for this in "ABCD":
+    print(("%s: %s of %d (%2.2f %%)" % (this, answers[this], total,
+            (float(answers[this])/float(total)) * 100)))
 

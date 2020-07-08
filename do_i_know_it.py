@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Authors:
 # Brad Geltz - brgeltz@gmail.com - Copyright 2016
@@ -59,7 +59,7 @@ while continue_loop:
 
     # Determine whether some questions have been asked fewer times than others.
     # Ask those for the first set.
-    min = sys.maxint
+    min = sys.maxsize
     questions = []
     for this in data:
         if this['times_asked'] <= min:
@@ -80,20 +80,20 @@ while continue_loop:
     for this in questions:
 
         # Print the question and potential answers
-        print ""
-        print ""
-        print "Question %d of %d :: %s" % (num, len(questions), this['number'])
+        print("")
+        print("")
+        print("Question %d of %d :: %s" % (num, len(questions), this['number']))
         num += 1
-        print this['text']
-        print ""
+        print(this['text'])
+        print("")
         ans_list = [ 'A', 'B', 'C', 'D' ]
         idx = 0
         for ta in this['answers']:
-            print "%s: %s" % (ans_list[idx], ta)
+            print("%s: %s" % (ans_list[idx], ta))
             idx += 1
 
         # Get an answer
-        resp = raw_input("Answer (QQQ to quit): ")
+        resp = input("Answer (QQQ to quit): ")
         resp = resp.upper()
         if resp == "QQQ":
             continue_loop = False
@@ -104,28 +104,28 @@ while continue_loop:
             this['times_correct'] += 1
             correct_list.append(this['number'])
             this['correct_in_a_row'] += 1
-            print "CORRECT"
+            print("CORRECT")
         else:
             this['times_wrong'] += 1
             incorrect_list.append(this['number'])
             this['correct_in_a_row'] = 0
-            print "INCORRECT (%s)" %(this['answer'])
+            print("INCORRECT (%s)" %(this['answer']))
         this['times_asked'] += 1
         with open(args.filename[0], 'w')as f:
             json.dump(data, f)
 
-    print "Round complete"
+    print("Round complete")
     cor = len(correct_list)
     wro = len(incorrect_list)
     tot = cor + wro
-    print "Correct:   %3d (%3.2f)" % (cor, (float(cor)/float(tot)) * 100)
-    print "Incorrect: %3d (%3.2f)" % (wro, (float(wro)/float(tot)) * 100)
-    print
-    print "Correct List:"
-    print correct_list
-    print
-    print "Incorrect List:"
-    print incorrect_list
+    print("Correct:   %3d (%3.2f)" % (cor, (float(cor)/float(tot)) * 100))
+    print("Incorrect: %3d (%3.2f)" % (wro, (float(wro)/float(tot)) * 100))
+    print()
+    print("Correct List:")
+    print(correct_list)
+    print()
+    print("Incorrect List:")
+    print(incorrect_list)
 
 with open(args.filename[0], 'w')as f:
     json.dump(data, f)

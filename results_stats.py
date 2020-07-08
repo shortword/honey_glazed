@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Authors:
 # Michael Bergeron - mikeb.code@gmail.com - Copyright 2016
@@ -48,8 +48,8 @@ def print_res(results, colors_off=False):
             CLR = ''
             color = ''
 
-        print (CLR + "Test: %s :: %d/%d = " + color + "%3.2f%%" + CLR) % \
-                (this, tc, ta, pct)
+        print((CLR + "Test: %s :: %d/%d = " + color + "%3.2f%%" + CLR) % \
+                (this, tc, ta, pct))
 
 # Argument Parsing
 parser = argparse.ArgumentParser(
@@ -88,23 +88,23 @@ for this in num_sorted:
     fill_dict(res_sect, test + sect, key_list, this)
     fill_dict(res_sub, test + sect + sub, key_list, this)
 
-print "========== SORTED BY TEST =========="
+print("========== SORTED BY TEST ==========")
 print_res(res_test, args.colors_off)
-print ""
+print("")
 
-print "========== SORTED BY SECTION =========="
+print("========== SORTED BY SECTION ==========")
 print_res(res_sect, args.colors_off)
-print ""
+print("")
 
-print "========== SORTED BY SUBSECTION =========="
+print("========== SORTED BY SUBSECTION ==========")
 print_res(res_sub, args.colors_off)
-print ""
+print("")
 
-print "========== QUESTION LAST ANSWERED INCORRECT =========="
+print("========== QUESTION LAST ANSWERED INCORRECT ==========")
 inc_list = []
 for this in num_sorted:
     if this['times_asked'] > 0 and this['correct_in_a_row'] == 0:
         inc_list.append(this['number'])
 
 for line in textwrap.wrap(" ".join(inc_list), 80):
-    print line
+    print(line)

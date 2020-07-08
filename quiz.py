@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Authors:
 # Brad Geltz - brgeltz@gmail.com - Copyright 2016
@@ -34,33 +34,33 @@ with open(args.filename[0], 'r') as f:
     data = json.load(f)
 
 random.seed(args.s)
-question_set = random.sample(xrange(len(data)), args.q)
+question_set = random.sample(range(len(data)), args.q)
 
-print '-' * 58
-print 'Amateur Radio / Ham Radio Quiz #%d - %d questions' % (args.s, args.q)
-print '-' * 58
+print('-' * 58)
+print('Amateur Radio / Ham Radio Quiz #%d - %d questions' % (args.s, args.q))
+print('-' * 58)
 
 letters = ['A', 'B', 'C', 'D']
 
 right = 0
 
 for i in range(0, args.q):
-    print
-    print 'Question (%d / %d) : %s - %s' % \
-        ((i+1), args.q, data[question_set[i]]['number'], data[question_set[i]]['text'])
+    print()
+    print('Question (%d / %d) : %s - %s' % \
+        ((i+1), args.q, data[question_set[i]]['number'], data[question_set[i]]['text']))
     if data[question_set[i]]['part'] != '((NOT SPECIFIED))':
-        print 'Part - %s' % data[question_set[i]]['part']
+        print('Part - %s' % data[question_set[i]]['part'])
 
     for j, k in enumerate(data[question_set[i]]['answers']):
-        print '\t%s. %s' % (letters[j], k)
-    print
+        print('\t%s. %s' % (letters[j], k))
+    print()
 
     while True:
-        ans = raw_input("? ")
+        ans = input("? ")
         ans = ans.upper()
         if ans in letters:
             break
-        print 'Enter only A, B, C, or D.'
+        print('Enter only A, B, C, or D.')
 
     msg = ''
     if ans == data[question_set[i]]['answer']:
@@ -69,7 +69,7 @@ for i in range(0, args.q):
     else:
         msg += 'WRONG (correct answer: %s)' % data[question_set[i]]['answer']
 
-    print '%s - (%d / %d) = %d%%' % (msg, right, (i+1), (right/float(i+1)*100))
+    print('%s - (%d / %d) = %d%%' % (msg, right, (i+1), (right/float(i+1)*100)))
 
-print "Test completed"
+print("Test completed")
 
